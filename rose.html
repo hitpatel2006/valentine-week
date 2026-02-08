@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Rose Day 🌹</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+  <audio autoplay loop>
+    <source src="music.mp3">
+  </audio>
+
+  <section>
+    <h1>Rose Day 🌹</h1>
+    <p>
+      Like a rose, <span id="partnerNameText" class="partner-name heart-beat"></span>,
+      you bring beauty into my life every day ❤️
+    </p>
+    <a href="propose.html" class="btn">Next 💍</a>
+  </section>
+
+  <script>
+    const name = localStorage.getItem("partnerName") || "My Love";
+    const el = document.getElementById("partnerNameText");
+
+    let i = 0;
+    el.innerText = "";
+
+    function typeName() {
+      if (i < name.length) {
+        el.innerText += name.charAt(i);
+        i++;
+        setTimeout(typeName, 150);
+      }
+    }
+    typeName();
+  </script>
+
+
+
+</body>
+
+</html>

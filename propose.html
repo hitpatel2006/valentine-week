@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Propose Day 💍</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <audio autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <section>
+    <h1>Propose Day 💍</h1>
+
+    <p id="proposalText">
+      <span id="partnerNameText" class="partner-name heart-beat"></span>,<br>
+      You make my world brighter every day.<br>
+      Will you be mine forever? ❤️
+    </p>
+
+    <div style="margin-top:30px;">
+      <button class="btn yes-btn" onclick="yesClicked()">YES 💖</button>
+      <button class="btn no-btn" onclick="noClicked()">NO 🙈</button>
+    </div>
+
+    <!-- Countdown hidden initially -->
+    <p id="unlockMsg" style="display:none;margin-top:25px;"></p>
+  </section>
+
+  <script>
+    /* partner name */
+    const partner =
+      localStorage.getItem("partnerName") || "My Love";
+    document.getElementById("partnerNameText").innerText = partner;
+    const name = localStorage.getItem("partnerName") || "My Love";
+    const el = document.getElementById("partnerNameText");
+
+    let i = 0;
+    el.innerText = "";
+
+    function typeName() {
+      if (i < name.length) {
+        el.innerText += name.charAt(i);
+        i++;
+        setTimeout(typeName, 150);
+      }
+    }
+    typeName();
+    /* proposal variations */
+    const proposals = [
+      "I can't imagine my future without you. Will you be mine forever? ❤️",
+      "My heart already chose you. Say yes? 💓",
+      "Life feels perfect with you. Will you stay with me? 🥺❤️"
+    ];
+
+    let proposalIndex = 0;
+
+    /* NO button logic */
+    function noClicked() {
+      proposalIndex = (proposalIndex + 1) % proposals.length;
+      document.getElementById("proposalText").innerHTML =
+        `<span class="partner-name heart-beat">${partner}</span>,<br>${proposals[proposalIndex]}`;
+    }
+
+    /* YES button logic */
+    function yesClicked() {
+      document.querySelector(".no-btn").style.display = "none";
+      document.querySelector(".yes-btn").style.display = "none";
+
+      document.getElementById("proposalText").innerHTML =
+        `<span class="partner-name heart-beat">${partner}</span>,<br>
+     YAYYY 😍❤️ You just made me the happiest person alive!`;
+
+      startCountdown();
+    }
+
+    /* ⏳ Countdown + auto unlock */
+    function startCountdown() {
+
+      // 🔴 SET NEXT DAY DATE HERE
+      const unlockDate = new Date("2026-02-09 00:00:00").getTime();
+      const msg = document.getElementById("unlockMsg");
+      msg.style.display = "block";
+
+      setInterval(() => {
+        const now = new Date().getTime();
+        const diff = unlockDate - now;
+
+        if (diff <= 0) {
+          window.location.href = "chocolate.html"; // NEXT PAGE
+          return;
+        }
+
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+
+        msg.innerHTML =
+          `⏳ Next surprise unlocks in <br>
+       <strong>${h}h ${m}m ${s}s</strong> 💝`;
+      }, 1000);
+    }
+
+  </script>
+
+</body>
+
+</html>

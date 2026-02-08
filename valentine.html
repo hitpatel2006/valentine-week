@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Valentine 💋</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <audio autoplay loop>
+    <source src="music.mp3">
+  </audio>
+
+  <section>
+    <h1>Happy Valentine’s Day 💖</h1>
+
+    <div class="slideshow">
+      <img src="images/pic1.jpg">
+      <img src="images/pic2.jpg">
+      <img src="images/pic3.jpg">
+    </div>
+
+    <p id="secret" style="display:none;">
+      You are my forever ❤️
+    </p>
+    <button class="btn" onclick="secret.style.display='block'">
+      Tap for secret 💌
+    </button>
+
+    <a class="btn" href="https://wa.me/?text=This%20website%20is%20made%20just%20for%20you%20❤️" target="_blank">
+      Share on WhatsApp 💚
+    </a>
+
+    <p style="margin-top:20px">— Vikas ❤️</p>
+  </section>
+
+  <canvas id="confetti"></canvas>
+
+  <script>
+    const c = document.getElementById("confetti"),
+      x = c.getContext("2d");
+    c.width = innerWidth; c.height = innerHeight;
+    let p = [...Array(150)].map(() => ({
+      x: Math.random() * c.width,
+      y: Math.random() * c.height, r: Math.random() * 6 + 2, d: Math.random() * 5
+    }));
+    (function draw() {
+      x.clearRect(0, 0, c.width, c.height);
+      p.forEach(i => {
+        x.beginPath(); x.arc(i.x, i.y, i.r, 0, Math.PI * 2);
+        x.fillStyle = "pink"; x.fill(); i.y += i.d;
+        if (i.y > c.height) i.y = 0;
+      }); requestAnimationFrame(draw);
+    })();
+  </script>
+
+</body>
+
+</html>
