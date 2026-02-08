@@ -13,14 +13,16 @@
   <section>
     <h1>❤️ Private Surprise ❤️</h1>
 
-    <input id="partnerName" class="input-box" placeholder="Your name 💖"><br><br>
+    <!-- <input id="partnerName" class="input-box" placeholder="Your name 💖"><br><br> -->
 
     <input type="password" id="pass" class="input-box" placeholder="Secret password 🔐"><br><br>
 
 
     <button class="btn" onclick="saveName(); checkPass()">Enter 💘</button>
 
-    <p id="hint" style="display:none;">Hint 💡 : our special word ❤️</p>
+    <p id="hint" style="display:none;">Hint 💡 : our special word ❤️<br />
+      The special word I use to call uuu by 3-4 cute names every day, ending with ur birthday date.
+    </p>
     <button class="btn" onclick="showHint()">Need hint?</button>
 
     <h3 id="countdown"></h3>
@@ -29,11 +31,12 @@
   <script>
     function saveName() {
       localStorage.setItem("partnerName",
-        document.getElementById("partnerName").value);
+        'ashuuu');
     }
 
     function checkPass() {
-      if (document.getElementById("pass").value === "love123") {
+      debugger
+      if (document.getElementById("pass").value === "vandru1205") {
         window.location.href = "rose.html";
       } else {
         alert("Wrong password 😜");
