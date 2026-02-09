@@ -169,3 +169,29 @@ h1 {
 .no-btn:hover {
   background: #888;
 }
+/* 🍫 Chocolate Day Background */
+.choco-bg {
+  background: linear-gradient(to bottom, #3e1f0e, #5a2d14, #8b4513);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* falling chocolates */
+.choco-bg::before {
+  content: "🍫 🍩 🍪 🍫 🍩 🍪";
+  position: fixed;
+  top: -10%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 2rem;
+  opacity: 0.25;
+  animation: chocoFall 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes chocoFall {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(100%); }
+}
