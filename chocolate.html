@@ -1,30 +1,67 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
   <title>Chocolate Day 🍫</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
+<body class="choco-bg">
 
-<body>
+<audio autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-  <audio autoplay loop>
-    <source src="music.mp3">
-  </audio>
+<section>
+  <h1>Chocolate Day 🍫</h1>
 
-  <section>
-    <h1>Chocolate Day 🍫</h1>
-    <p>
-      Life with you, <span id="name"></span>,
-      is sweeter than chocolate 🍫
-    </p>
-    <a href="teddy.html" class="btn">Next 🧸</a>
-  </section>
+  <p>
+    Just like chocolate,
+    <span id="partnerNameText" class="partner-name"></span>,  
+    you make my life sweeter every day 💕
+  </p>
 
-  <script>
-    name.innerText = localStorage.getItem("partnerName") || "My Love";
-  </script>
+  <!-- Countdown -->
+  <p id="unlockMsg" style="margin-top:25px;"></p>
+
+  <!-- NEXT button (hidden initially) -->
+  <a href="teddy.html"
+     id="nextBtn"
+     class="btn"
+     style="display:none;">
+     Next 🧸
+  </a>
+</section>
+
+<script>
+/* partner name */
+const partner =
+  localStorage.getItem("partnerName") || "My Love";
+document.getElementById("partnerNameText").innerText = partner;
+
+/* ⏳ Date logic */
+const unlockDate = new Date("2026-02-10 00:00:00").getTime();
+const msg = document.getElementById("unlockMsg");
+const nextBtn = document.getElementById("nextBtn");
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = unlockDate - now;
+
+  if(diff <= 0){
+    msg.innerHTML = "🍫 Surprise unlocked! 💖";
+    nextBtn.style.display = "inline-block";
+    return;
+  }
+
+  const h = Math.floor((diff/(1000*60*60)) % 24);
+  const m = Math.floor((diff/(1000*60)) % 60);
+  const s = Math.floor((diff/1000) % 60);
+
+  msg.innerHTML =
+    `⏳ Next surprise unlocks in <br>
+     <strong>${h}h ${m}m ${s}s</strong>`;
+}, 1000);
+</script>
 
 </body>
-
 </html>
